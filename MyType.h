@@ -4,14 +4,28 @@
 #include <cstdio>
 #include <cstring>
 #include <stdio.h>
+#include <string>
+#include <iostream>
 
 class MyType
 {
 public:
 
     /* Default Contructor */
+#if 0
     MyType() = default;
 
+    MyType(const std::string text){
+        m_data = text;
+        std::cout << "MyType::MyType() contructor called." << std::endl;
+    }
+    ~MyType(){
+        std::cout << "MyType::~MyType() destructor called." << std::endl;
+    }
+    void print(){
+        std::cout << "m_data: " << m_data << std::endl;
+    }
+#endif
     /* User defined Constructor */
     MyType(const char* name){
 
@@ -54,9 +68,8 @@ public:
      }
 
     void print(){
-        printf("%s\n", m_data);
+        printf("m_data: %s\n", m_data);
     }
-
 private:
     char* m_data;
     std::size_t m_dataSize;

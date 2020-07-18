@@ -6,7 +6,7 @@
 
 # uncomment the last part in line 9 to compile with debug symbold 
 
-CFLAGS =-Wall -Werror -std=c++11 #-g 
+CFLAGS =-Wall -Werror -std=c++11 -O0
 
 
 all: main.o
