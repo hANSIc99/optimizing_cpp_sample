@@ -12,17 +12,18 @@
 void case_1(){
 
     /* Not optimized; invokes copy constructor */
-    MyType   type_1("1. opensource.com");
-    MyObject object_1(type_1); 
-    object_1.printInnerData();
+    MyType<double> type_1({1.2, 3.4, 5.6});
+    MyObject<MyType<double> > object_1(type_1); 
+    object_1.m_mytype.print();
 
 }
 void case_2(){
     /* Optimized: Invokes move constructor */
-    MyObject object_2("2. opensource.com");
-    object_2.printInnerData();
+    MyObject<MyType<double> >  object_2(MyType<double>({2.4, 5.6, 7.8, 8.0}));
+    object_2.m_mytype.print();
 }
 
+#if 0
 void case_3(){
     int cnt = 0;
     std::vector<double> container;
@@ -39,6 +40,7 @@ void case_3(){
         std::this_thread::sleep_for(std::chrono::milliseconds(SLEEP_TIME));
     }
 }
+#endif
 
 int main(int argc, char* argv[]){
 
@@ -49,19 +51,19 @@ int main(int argc, char* argv[]){
     }
     std::cout << "Application started..." << std::endl;
     std::cout << "Process Id: " << ::getpid() << std::endl; 
+
     switch(*argv[1]){
         case '1':
             case_1();
            break;
         case '2':
-           case_2();
+            case_2();
             break;
         case '3':
-            case_3();
+            //case_3();
             break;
         default:
             std::cout << "Illegal option, enter a number from 1 - 5" << std::endl;
     }
-
 
 }

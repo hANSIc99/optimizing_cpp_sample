@@ -3,24 +3,19 @@
 
 #include "MyType.h"
 
+template <class T>
 class MyObject{
 public:
     
-    MyObject(const MyType& mytype):
+    MyObject(const T& mytype):
         m_mytype(mytype){
     }
 
-    MyObject(MyType&& mytype):
+    MyObject(T&& mytype):
         m_mytype(std::move(mytype)){
     }
 
-    void printInnerData(){
-        m_mytype.print();
-    }
-
-private:
-    MyType m_mytype;
-
+    T m_mytype;
 };
 
 #endif
