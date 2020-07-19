@@ -23,6 +23,15 @@ void case_2(){
     object_2.m_mytype.print();
 }
 
+void case_3(){
+    /* Optimized: Invokes move constructor */
+    MyType<double> type_1({1.2, 3.4, 5.6});
+    MyObject<MyType<double> >  object_2(std::move(type_1));
+    object_2.m_mytype.print();
+    /* Dangerous: std::move destroys the object */
+    type_1.print();
+}
+
 #if 0
 void case_3(){
     int cnt = 0;
@@ -60,7 +69,7 @@ int main(int argc, char* argv[]){
             case_2();
             break;
         case '3':
-            //case_3();
+            case_3();
             break;
         default:
             std::cout << "Illegal option, enter a number from 1 - 5" << std::endl;
