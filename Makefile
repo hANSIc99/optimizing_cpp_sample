@@ -6,7 +6,7 @@
 
 # uncomment the last part in line 9 to compile with debug symbold 
 
-CFLAGS =-Wall -Werror -std=c++11 -O0
+CFLAGS =-Wall -Werror -std=c++11 #-DOPT1 #-O0
 
 
 all: main.o
@@ -18,3 +18,4 @@ main.o: main.cpp MyType.h MyObject.h
 .PHONY: clean
 clean:
 	rm *.o
+	rm memory_sample
