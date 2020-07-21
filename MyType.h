@@ -23,13 +23,20 @@ public:
     MyType(const std::vector<double> data){
 
         m_data = new std::vector<T>(data);
+
+#ifdef PRINT
         std::cout << "MyType::MyType() contructor called." << std::endl;
+#endif
 
     }
 
     /* Destructor */
     ~MyType(){
         delete m_data;
+
+#ifdef PRINT
+        std::cout << "MyType::~MyType() destructor called." << std::endl;
+#endif
     }
 
     /* Copy constructor */
@@ -40,8 +47,11 @@ public:
         } else {
             m_data = NULL;
         }
+
+#ifdef PRINT
         std::cout << "MyType::MyType(const MyType&) copy constructor called" << \
             std::endl;
+#endif
     }
 
     /* Move constructor */
@@ -50,9 +60,11 @@ public:
 
         m_data = other.m_data;
         other.m_data = NULL;
+
+#ifdef PRINT
         std::cout << "MyType::MyType(MyType&& other) move constructor called" << \
             std::endl;
-
+#endif
     }
 
     /* Copy assignment */
@@ -69,8 +81,10 @@ public:
         }
         return *this;
 
+#ifdef PRINT
         std::cout << "MyType::MyType& operator=(const MyType& other) copy \
             assignmend called" << std::endl;
+#endif
     }
 
     /* Move assignment */
@@ -83,8 +97,10 @@ public:
         }
         return *this;
 
+#ifdef PRINT
         std::cout << "MyType::MyType& operator=(MyType&& other) move assignment \
             called" << std::endl;
+#endif
     }
 
 

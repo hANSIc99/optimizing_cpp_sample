@@ -1,6 +1,7 @@
 #ifndef CARRIER_H
 #define CARRIER_H
 
+#include <vector>
 #include "MyType.h"
 
 template <class T>
@@ -11,9 +12,11 @@ public:
         m_mytype(mytype){
     }
 
+    /* TODO
     MyObject(T&& mytype):
         m_mytype(std::move(mytype)){
     }
+    */
 
     T m_mytype;
 };
