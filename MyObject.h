@@ -15,6 +15,11 @@ public:
         m_mytype(mytype){
     };
 
+    /* Contructor with move */
+
+    MyObject(T&& mytype):
+        m_mytype(std::move(mytype)){
+    };
 
     /* Copy constructor */
     MyObject(const MyObject& other):
