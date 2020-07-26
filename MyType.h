@@ -8,9 +8,13 @@
 #include <iostream>
 #include <vector>
 
+/*
 #if defined(OPT1) || defined(OPT2) || defined(OPT3)
     #define PRINT
 #endif
+*/
+
+#define PRINT
 
 template <class T>
 class MyType

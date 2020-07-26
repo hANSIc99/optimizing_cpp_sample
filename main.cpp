@@ -37,7 +37,7 @@ void case_4(std::vector<double> &container){
     int i;
     std::vector<MyObject<MyType<double> > > my_objects;
 
-    for(i=0; i < 1000; i++){
+    for(i=0; i < 1 ; i++){
         /* Not optimized; invokes copy constructor */
         MyType<double> type_1(container);
         MyObject<MyType<double> > object_1(type_1);
@@ -51,7 +51,7 @@ void case_5(std::vector<double> &container){
     int i;
     std::vector<MyObject<MyType<double> > > my_objects;
 
-    for(i=0; i < 1000; i++){
+    for(i=0; i < 1; i++){
 
         /* Optimized: Invokes move constructor */
 
