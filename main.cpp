@@ -4,6 +4,7 @@
 #include <cstdlib>
 #include <chrono>
 #include <thread>
+#include <cmath>
 #include "MyType.h"
 #include "MyObject.h"
 
@@ -37,7 +38,7 @@ void case_4(std::vector<double> &container){
     int i;
     std::vector<MyObject<MyType<double> > > my_objects;
 
-    for(i=0; i < 1 ; i++){
+    for(i=0; i < 1000 ; i++){
         /* Not optimized; invokes copy constructor */
         MyType<double> type_1(container);
         MyObject<MyType<double> > object_1(type_1);
@@ -51,7 +52,7 @@ void case_5(std::vector<double> &container){
     int i;
     std::vector<MyObject<MyType<double> > > my_objects;
 
-    for(i=0; i < 1; i++){
+    for(i=0; i < 1000; i++){
 
         /* Optimized: Invokes move constructor */
 
@@ -62,24 +63,6 @@ void case_5(std::vector<double> &container){
 
 }
 
-#if 0
-void case_3(){
-    int cnt = 0;
-    std::vector<double> container;
-
-    while(cnt < 30){
-        cnt++;
-        double nmbr = (double)(std::rand() + 1); 
-        nmbr /= 333.3333; 
-        container.push_back(nmbr);
-        std::this_thread::sleep_for(std::chrono::milliseconds(SLEEP_TIME));
-    }
-    while(container.size() > 0){
-        container.pop_back();
-        std::this_thread::sleep_for(std::chrono::milliseconds(SLEEP_TIME));
-    }
-}
-#endif
 
 int main(int argc, char* argv[]){
 
@@ -105,12 +88,36 @@ int main(int argc, char* argv[]){
     case_2(container);
 #elif OPT3
     std::cout << "Compiled with OPT3" << std::endl;
+    case_3();
 #elif OPT4
     std::cout << "Compiled with OPT4" << std::endl;
-    case_4(container);
+    int cnt = 0;
+    std::chrono::duration<double, std::milli> sum(0);
+    while(true){
+        auto start = std::chrono::high_resolution_clock::now();
+        case_4(container);
+        cnt++;
+        auto stop = std::chrono::high_resolution_clock::now();
+        auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(stop - start);
+        sum += duration;
+        std::cout << "Average time: " << std::round(sum.count() / cnt)  << "ms - Last execution took: " << \
+            duration.count() << "um" << std::endl;
+    }
 #elif OPT5
     std::cout << "Compiled with OPT5" << std::endl;
-    case_5(container);
+    int cnt = 0;
+    std::chrono::duration<double, std::milli> sum(0);
+    while(true){
+        auto start = std::chrono::high_resolution_clock::now();
+        case_5(container);
+        cnt++;
+        auto stop = std::chrono::high_resolution_clock::now();
+        auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(stop - start);
+        sum += duration;
+        std::cout << "Average time: " << std::round(sum.count() / cnt)  << "ms - Last execution took: " << \
+            duration.count() << "um" << std::endl;
+
+    }
 #else
     std::cout << "Run 'make' with option argument OPT{n}, n={1,2,3} < " << std::endl;
     std::cout << "E.g. 'make CFLAGS=-DOPT2" << std::endl;
