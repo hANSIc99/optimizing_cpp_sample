@@ -27,11 +27,11 @@ void case_2(std::vector<double> &container){
 void case_3(){
 
     /* Optimized: Invokes move constructor */
-    MyType<double> type_1({1.2, 3.4, 5.6});
-    MyObject<MyType<double> >  object_2(std::move(type_1));
-    object_2.m_mytype.print();
+    MyType<double> type_3({1.2, 3.4, 5.6});
+    MyObject<MyType<double> >  object_3(std::move(type_3));
+    object_3.m_mytype.print();
     /* Dangerous: std::move destroys the object */
-    type_1.print();
+    type_3.print();
 }
 void case_4(std::vector<double> &container){
     
