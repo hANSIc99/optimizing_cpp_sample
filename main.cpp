@@ -26,7 +26,6 @@ void case_2(std::vector<double> &container){
 
 void case_3(){
 
-    /* Optimized: Invokes move constructor */
     MyType<double> type_3({1.2, 3.4, 5.6});
     MyObject<MyType<double> >  object_3(std::move(type_3));
     object_3.m_mytype.print();
